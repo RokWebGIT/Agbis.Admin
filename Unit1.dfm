@@ -16,6 +16,7 @@ object Form1: TForm1
   Position = poScreenCenter
   ShowHint = True
   Visible = True
+  OnDestroy = FormDestroy
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -212,10 +213,6 @@ object Form1: TForm1
         TabOrder = 0
         object TabSheet1: TTabSheet
           Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1089#1082#1083#1072#1076
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GridPanel2: TGridPanel
             Left = 0
             Top = 0
@@ -450,10 +447,6 @@ object Form1: TForm1
         object TabSheet3: TTabSheet
           Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1089#1090#1072#1090#1091#1089
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label5: TLabel
             Left = 0
             Top = 0
@@ -492,10 +485,6 @@ object Form1: TForm1
         object TabSheet5: TTabSheet
           Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1080
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object ComboBox7: TComboBox
             Left = 0
             Top = 0

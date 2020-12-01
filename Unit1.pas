@@ -383,22 +383,26 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-if Edit1.Text='1237890' then
-Password.Hide;
-
+  if Edit1.Text='1237890' then
+    Password.Hide;
 end;
 
 procedure TForm1.Edit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-if Key=VK_Return then
-Button2.OnClick(Sender);
+  if Key=VK_Return then
+    Button2.OnClick(Sender);
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
 begin
-Connection.Free;
-Query.Free;
-Query2.Free;
+  If Assigned(Query) then
+    Query.Free;
+  If Assigned(Query2) then
+    Query2.Free;
+  if Assigned(DataSource) then
+    DataSource.Free;
+  If Assigned(Connection) then
+    Connection.Free;
 end;
 
 procedure TForm1.FormShow(Sender: TObject);
@@ -406,9 +410,9 @@ procedure TForm1.FormShow(Sender: TObject);
   OpenDialog: TOpenDialog;
   I: Integer;
 begin
-Password.Show;
-Password.BringToFront;
-Edit1.SetFocus;
+  Password.Show;
+  Password.BringToFront;
+  Edit1.SetFocus;
   FDB := '';
   OpenDialog := TOpenDialog.Create(nil);
   if FileExists(ExtractFilePath(Application.ExeName)+'\DB\Arm.fdb')=True then
