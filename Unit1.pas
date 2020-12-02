@@ -1,4 +1,4 @@
-unit Unit1;
+п»їunit Unit1;
 
 interface
 
@@ -95,13 +95,13 @@ Result := '';
   Except
   on E:Exception do
     begin
-    Result := 'Заказ '+DocNum+': произошла ошибка при первом запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+    Result := 'Р—Р°РєР°Р· '+DocNum+': РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РїРµСЂРІРѕРј Р·Р°РїСЂРѕСЃРµ Рє Р‘Р”.'+#13#10+E.ClassName+' '+E.Message+#13#10+'РћР±СЂР°С‚РёС‚РµСЃСЊ Рє С‚РµС…. РїРѕРґРґРµСЂР¶РєРµ!';
     exit;
     end;
   End;
   if Query.RecordCount<1 then
   begin
-    Result := 'Заказ '+DocNum+': не удалось найти заказ за этот год!';
+    Result := 'Р—Р°РєР°Р· '+DocNum+': РЅРµ СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё Р·Р°РєР°Р· Р·Р° СЌС‚РѕС‚ РіРѕРґ!';
     exit;
   end;
   Query.SQL.Text := 'Update docs_order set '+FieldName+'='+FieldValue+' where doc_id='+Query.FieldByName('doc_id').AsString;
@@ -110,11 +110,11 @@ Result := '';
   Except
   on E:Exception do
     begin
-    Result := 'Заказ '+DocNum+': произошла ошибка при втором запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+    Result := 'Р—Р°РєР°Р· '+DocNum+': РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‚РѕСЂРѕРј Р·Р°РїСЂРѕСЃРµ Рє Р‘Р”.'+#13#10+E.ClassName+' '+E.Message+#13#10+'РћР±СЂР°С‚РёС‚РµСЃСЊ Рє С‚РµС…. РїРѕРґРґРµСЂР¶РєРµ!';
     exit;
     end;
   End;
-  Result := 'Заказ '+DocNum+': обработан!';
+  Result := 'Р—Р°РєР°Р· '+DocNum+': РѕР±СЂР°Р±РѕС‚Р°РЅ!';
 end;
 
 Function ChangeFiscPay(DocNum: String; Card: Integer = 0; Kassa: Integer = 0; PosTerm: Integer = 0): String;
@@ -128,14 +128,14 @@ begin
   Except
   on E:Exception do
     begin
-    Result := 'Заказ '+DocNum+': произошла ошибка при первом запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+    Result := 'Р—Р°РєР°Р· '+DocNum+': РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РїРµСЂРІРѕРј Р·Р°РїСЂРѕСЃРµ Рє Р‘Р”.'+#13#10+E.ClassName+' '+E.Message+#13#10+'РћР±СЂР°С‚РёС‚РµСЃСЊ Рє С‚РµС…. РїРѕРґРґРµСЂР¶РєРµ!';
     exit;
     end;
   End;
 
   if Query.RecordCount<1 then
   begin
-    Result := 'Заказ '+DocNum+': не удалось найти заказ за этот год!';
+    Result := 'Р—Р°РєР°Р· '+DocNum+': РЅРµ СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё Р·Р°РєР°Р· Р·Р° СЌС‚РѕС‚ РіРѕРґ!';
     exit;
   end;
 
@@ -144,14 +144,14 @@ begin
   Except
   on E:Exception do
     begin
-    Result := 'Заказ '+DocNum+': произошла ошибка при первом запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+    Result := 'Р—Р°РєР°Р· '+DocNum+': РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РїРµСЂРІРѕРј Р·Р°РїСЂРѕСЃРµ Рє Р‘Р”.'+#13#10+E.ClassName+' '+E.Message+#13#10+'РћР±СЂР°С‚РёС‚РµСЃСЊ Рє С‚РµС…. РїРѕРґРґРµСЂР¶РєРµ!';
     exit;
     end;
   End;
 
   if Query.RecordCount<1 then
   begin
-    Result := 'Заказ '+DocNum+': не удалось найти заказ за этот год!';
+    Result := 'Р—Р°РєР°Р· '+DocNum+': РЅРµ СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё Р·Р°РєР°Р· Р·Р° СЌС‚РѕС‚ РіРѕРґ!';
     exit;
   end;
 
@@ -160,14 +160,14 @@ begin
   Except
   on E:Exception do
     begin
-    Result := 'Заказ '+DocNum+': произошла ошибка при втором запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+    Result := 'Р—Р°РєР°Р· '+DocNum+': РїСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РІС‚РѕСЂРѕРј Р·Р°РїСЂРѕСЃРµ Рє Р‘Р”.'+#13#10+E.ClassName+' '+E.Message+#13#10+'РћР±СЂР°С‚РёС‚РµСЃСЊ Рє С‚РµС…. РїРѕРґРґРµСЂР¶РєРµ!';
     exit;
     end;
   End;
 
   if Query.RecordCount<1 then
   begin
-    Result := 'Заказ '+DocNum+': не удалось найти оплаты!';
+    Result := 'Р—Р°РєР°Р· '+DocNum+': РЅРµ СѓРґР°Р»РѕСЃСЊ РЅР°Р№С‚Рё РѕРїР»Р°С‚С‹!';
     exit;
   end;
 
@@ -201,7 +201,7 @@ begin
         Query.Next;
       end;
     Except
-      Result := 'Заказ '+DocNum+': не удалось изменить фискальный призак!';
+      Result := 'Р—Р°РєР°Р· '+DocNum+': РЅРµ СѓРґР°Р»РѕСЃСЊ РёР·РјРµРЅРёС‚СЊ С„РёСЃРєР°Р»СЊРЅС‹Р№ РїСЂРёР·Р°Рє!';
       exit;
     End;
 
@@ -210,14 +210,14 @@ begin
     Query2.ExecSQL('alter trigger DOCS_KASSA_BU_FISC active');
   End;
 
-  Result := 'Заказ '+DocNum+': обработан!';
+  Result := 'Р—Р°РєР°Р· '+DocNum+': РѕР±СЂР°Р±РѕС‚Р°РЅ!';
 
 end;
 
 Function ExecSQL(Str: String; Form2Show: Boolean = false): String;
 Begin
   Try
-    Result := 'Выполняем скрипт:'+#13#10+Str+#13#10;
+    Result := 'Р’С‹РїРѕР»РЅСЏРµРј СЃРєСЂРёРїС‚:'+#13#10+Str+#13#10;
     if Form2Show then
     Query2.ExecSQL(Str) else
     begin
@@ -226,11 +226,11 @@ Begin
     DataSource.Dataset := Query2;
     Form2.DBGrid1.DataSource := DataSource;
     end;
-    Result := Result+'Скрипт выполнен успешно';
+    Result := Result+'РЎРєСЂРёРїС‚ РІС‹РїРѕР»РЅРµРЅ СѓСЃРїРµС€РЅРѕ';
   Except
     On E:Exception do
     begin
-      Result := Result+'Скрипт не выполнен из-за ошибки: '+#13#10+E.Message;
+      Result := Result+'РЎРєСЂРёРїС‚ РЅРµ РІС‹РїРѕР»РЅРµРЅ РёР·-Р·Р° РѕС€РёР±РєРё: '+#13#10+E.Message;
     end;
   End;
 End;
@@ -238,7 +238,7 @@ End;
 Function GetPassword: String;
 Begin
   Try
-    Result := 'Пароль: ';
+    Result := 'РџР°СЂРѕР»СЊ: ';
     Query.SQL.Clear;
     Query.SQL.Add('select USER_PASSWORD from users where description like '+#39+'%'+Form1.ComboBox7.Text+'%'+#39);
     Query.Open;
@@ -247,7 +247,7 @@ Begin
   Except
     On E:Exception do
     begin
-      Result := 'Произошла ошибка: '+#13#10+E.Message;
+      Result := 'РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°: '+#13#10+E.Message;
     end;
   End;
 End;
@@ -258,11 +258,11 @@ Begin
     Query.SQL.Clear;
     Query.SQL.Add('update users set USER_PASSWORD='+#39+Form1.Edit2.Text+#39+' where description like '+#39+'%'+Form1.ComboBox7.Text+'%'+#39);
     Query.ExecSQL;
-    Result := 'Пароль изменен успешно!';
+    Result := 'РџР°СЂРѕР»СЊ РёР·РјРµРЅРµРЅ СѓСЃРїРµС€РЅРѕ!';
   Except
     On E:Exception do
     begin
-      Result := 'Произошла ошибка: '+#13#10+E.Message;
+      Result := 'РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°: '+#13#10+E.Message;
     end;
   End;
 End;
@@ -429,7 +429,7 @@ begin
       end;
   if FDB='' then
   begin
-    ShowMessage('Не указан путь до базы!');
+    ShowMessage('РќРµ СѓРєР°Р·Р°РЅ РїСѓС‚СЊ РґРѕ Р±Р°Р·С‹!');
     Application.Terminate;
   end;
 
@@ -448,7 +448,7 @@ begin
     Except
     on E:Exception do
       begin
-        ShowMessage('Произошла ошибка при подключении к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!');
+        ShowMessage('РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РїСЂРё РїРѕРґРєР»СЋС‡РµРЅРёРё Рє Р‘Р”.'+#13#10+E.ClassName+' '+E.Message+#13#10+'РћР±СЂР°С‚РёС‚РµСЃСЊ Рє С‚РµС…. РїРѕРґРґРµСЂР¶РєРµ!');
         Application.Terminate;
       end;
     End;
@@ -464,13 +464,13 @@ begin
     Query.Open('select * from sclads');
     Query.FetchAll;
   except
-    ShowMessage('Не удалось загрузить названия складов!');
+    ShowMessage('РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ РЅР°Р·РІР°РЅРёСЏ СЃРєР»Р°РґРѕРІ!');
     Application.Terminate;
   end;
 
   if Query.RecordCount<=0 then
   begin
-    ShowMessage('Не удалось загрузить названия складов!');
+    ShowMessage('РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ РЅР°Р·РІР°РЅРёСЏ СЃРєР»Р°РґРѕРІ!');
     Application.Terminate;
   end else
   begin
@@ -489,13 +489,13 @@ begin
     Query.Open('select * from users order by description');
     Query.FetchAll;
   except
-    ShowMessage('Не удалось загрузить пользователей');
+    ShowMessage('РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№');
     Application.Terminate;
   end;
 
   if Query.RecordCount<=0 then
   begin
-    ShowMessage('Не удалось загрузить пользователей!');
+    ShowMessage('РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№!');
     Application.Terminate;
   end else
   begin
