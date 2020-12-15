@@ -86,7 +86,7 @@ object Form1: TForm1
       object Label9: TLabel
         Left = 1
         Top = 209
-        Width = 243
+        Width = 401
         Height = 34
         Align = alBottom
         Alignment = taCenter
@@ -97,6 +97,7 @@ object Form1: TForm1
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
+        ExplicitWidth = 243
       end
       object Button2: TButton
         Left = 1
@@ -205,17 +206,13 @@ object Form1: TForm1
         Width = 686
         Height = 274
         Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1085#1077#1086#1073#1093#1086#1076#1080#1084#1086#1077' '#1076#1077#1081#1089#1090#1074#1080#1077
-        ActivePage = TabSheet2
+        ActivePage = TabSheet1
         Align = alClient
         Anchors = []
         MultiLine = True
         TabOrder = 0
         object TabSheet1: TTabSheet
           Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1089#1082#1083#1072#1076
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GridPanel2: TGridPanel
             Left = 0
             Top = 0
@@ -248,6 +245,11 @@ object Form1: TForm1
                 Column = 1
                 Control = Label3
                 Row = 0
+              end
+              item
+                Column = 1
+                Control = CheckBox1
+                Row = 1
               end>
             RowCollection = <
               item
@@ -257,6 +259,9 @@ object Form1: TForm1
                 Value = 51.129700352471990000
               end>
             TabOrder = 0
+            DesignSize = (
+              678
+              246)
             object ComboBox1: TComboBox
               Left = 0
               Top = 0
@@ -266,6 +271,7 @@ object Form1: TForm1
               Align = alTop
               Style = csOwnerDrawFixed
               TabOrder = 0
+              OnChange = ComboBox1Change
               Items.Strings = (
                 #1058#1077#1082#1091#1097#1080#1081' '#1089#1082#1083#1072#1076
                 #1057#1082#1083#1072#1076' '#1087#1088#1080#1077#1084#1072
@@ -297,15 +303,22 @@ object Form1: TForm1
               ParentFont = False
               ExplicitWidth = 99
             end
+            object CheckBox1: TCheckBox
+              Left = 278
+              Top = 174
+              Width = 87
+              Height = 17
+              Anchors = []
+              Caption = #1057' '#1091#1089#1083#1091#1075#1072#1084#1080
+              TabOrder = 2
+              ExplicitLeft = 63
+              ExplicitTop = 177
+            end
           end
         end
         object TabSheet2: TTabSheet
           Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1092#1080#1089#1082#1072#1083#1100#1085#1099#1081' '#1087#1088#1080#1079#1085#1072#1082' '#1086#1087#1083#1072#1090
           ImageIndex = 1
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object GridPanel3: TGridPanel
             Left = 0
             Top = 0
@@ -454,10 +467,6 @@ object Form1: TForm1
         object TabSheet3: TTabSheet
           Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1089#1090#1072#1090#1091#1089
           ImageIndex = 2
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Label5: TLabel
             Left = 0
             Top = 0
@@ -496,10 +505,6 @@ object Form1: TForm1
         object TabSheet5: TTabSheet
           Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1080
           ImageIndex = 4
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object ComboBox7: TComboBox
             Left = 0
             Top = 0
@@ -537,10 +542,6 @@ object Form1: TForm1
         object TabSheet4: TTabSheet
           Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100' '#1087#1088#1086#1080#1079#1074#1086#1083#1100#1085#1099#1081' '#1079#1072#1087#1088#1086#1089
           ImageIndex = 3
-          ExplicitLeft = 0
-          ExplicitTop = 0
-          ExplicitWidth = 0
-          ExplicitHeight = 0
           object Memo3: TMemo
             Left = 0
             Top = 0

@@ -62,11 +62,13 @@ type
     ComboBox7: TComboBox;
     Edit2: TEdit;
     RadioGroup1: TRadioGroup;
+    CheckBox1: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Edit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormDestroy(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -87,11 +89,16 @@ implementation
 
 uses Unit2;
 
-Function ChangeFieldOrder(DocNum, FieldName, FieldValue: String): String;
+Function ChangeFieldOrder(DocNum, FieldName, FieldValue: String; WithServices: Boolean = false): String;
+  Var
+  doc_id, dor_id: string;
 begin
 Result := '';
+doc_id := '';
+dor_id := '';
+
   Try
-  Query.Open('select * from docs where cast(doc_date as date)>='+#39+'01.01.'+IntToStr(YearOF(now))+#39+' and doc_num = '+#39+DocNum+#39+' order by doc_date desc');
+    Query.Open('select * from docs where cast(doc_date as date)>='+#39+'01.01.'+IntToStr(YearOF(now))+#39+' and doc_num = '+#39+DocNum+#39+' order by doc_date desc');
   Except
   on E:Exception do
     begin
@@ -99,14 +106,15 @@ Result := '';
     exit;
     end;
   End;
+
   if Query.RecordCount<1 then
   begin
     Result := 'Заказ '+DocNum+': не удалось найти заказ за этот год!';
     exit;
-  end;
-  Query.SQL.Text := 'Update docs_order set '+FieldName+'='+FieldValue+' where doc_id='+Query.FieldByName('doc_id').AsString;
+  end else doc_id := Query.FieldByName('doc_id').AsString;
+
   Try
-  Query.ExecSQL;
+    Query.Open('select * from docs_order where doc_id = '+doc_id+'');
   Except
   on E:Exception do
     begin
@@ -114,6 +122,39 @@ Result := '';
     exit;
     end;
   End;
+
+  if Query.RecordCount<1 then
+  begin
+    Result := 'Заказ '+DocNum+': не удалось найти заказ за этот год!';
+    exit;
+  end else dor_id := Query.FieldByName('id').AsString;
+
+  Query.SQL.Text := 'Update docs_order set '+FieldName+'='+FieldValue+' where doc_id='+doc_id;
+
+  Try
+    Query.ExecSQL;
+  Except
+  on E:Exception do
+    begin
+    Result := 'Заказ '+DocNum+': произошла ошибка при третьем запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+    exit;
+    end;
+  End;
+
+  if WithServices then
+  begin
+    Query.SQL.Text := 'Update doc_order_services set '+FieldName+'='+FieldValue+' where doc_order_id='+dor_id;
+    Try
+      Query.ExecSQL;
+    Except
+    on E:Exception do
+      begin
+      Result := 'Заказ '+DocNum+': произошла ошибка при четвертом запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+      exit;
+      end;
+    End;
+  end;
+
   Result := 'Заказ '+DocNum+': обработан!';
 end;
 
@@ -298,7 +339,7 @@ begin
           0:
             begin
               for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'CURRENT_SCLAD_ID',IntToStr(GetScladIdByName(ComboBox2.Text))));
+              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'CURRENT_SCLAD_ID',IntToStr(GetScladIdByName(ComboBox2.Text)), Form1.CheckBox1.Checked));
             end;
           1:
             begin
@@ -385,6 +426,12 @@ procedure TForm1.Button2Click(Sender: TObject);
 begin
   if Edit1.Text='1237890' then
     Password.Hide;
+end;
+
+procedure TForm1.ComboBox1Change(Sender: TObject);
+begin
+  CheckBox1.Checked := false;
+  if Combobox1.ItemIndex=0 then CheckBox1.Visible := true else CheckBox1.Visible := false;
 end;
 
 procedure TForm1.Edit1KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
