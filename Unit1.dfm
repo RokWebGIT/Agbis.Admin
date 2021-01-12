@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = #1040#1075#1073#1080#1089'.'#1040#1076#1084#1080#1085
   ClientHeight = 506
-  ClientWidth = 804
+  ClientWidth = 953
   Color = clBtnFace
   TransparentColorValue = clBtnFace
   DoubleBuffered = True
@@ -23,7 +23,7 @@ object Form1: TForm1
   object Label8: TLabel
     Left = 0
     Top = 487
-    Width = 804
+    Width = 953
     Height = 19
     Align = alBottom
     Alignment = taRightJustify
@@ -34,13 +34,13 @@ object Form1: TForm1
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
-    ExplicitLeft = 589
+    ExplicitLeft = 738
     ExplicitWidth = 215
   end
   object Password: TPanel
     Left = 0
     Top = 0
-    Width = 804
+    Width = 953
     Height = 487
     Align = alClient
     BevelOuter = bvNone
@@ -48,7 +48,7 @@ object Form1: TForm1
     object GridPanel6: TGridPanel
       Left = 0
       Top = 0
-      Width = 804
+      Width = 953
       Height = 487
       Align = alClient
       ColumnCollection = <
@@ -86,7 +86,7 @@ object Form1: TForm1
       object Label9: TLabel
         Left = 1
         Top = 209
-        Width = 401
+        Width = 475
         Height = 34
         Align = alBottom
         Alignment = taCenter
@@ -102,7 +102,7 @@ object Form1: TForm1
       object Button2: TButton
         Left = 1
         Top = 243
-        Width = 802
+        Width = 951
         Height = 50
         Align = alTop
         Caption = #1042#1086#1081#1090#1080
@@ -116,9 +116,9 @@ object Form1: TForm1
         OnClick = Button2Click
       end
       object Edit1: TEdit
-        Left = 402
+        Left = 476
         Top = 201
-        Width = 401
+        Width = 476
         Height = 42
         Align = alBottom
         Font.Charset = DEFAULT_CHARSET
@@ -136,7 +136,7 @@ object Form1: TForm1
   object Main: TPanel
     Left = 0
     Top = 0
-    Width = 804
+    Width = 953
     Height = 487
     Align = alClient
     BevelOuter = bvNone
@@ -144,7 +144,7 @@ object Form1: TForm1
     object Label1: TLabel
       Left = 0
       Top = 299
-      Width = 804
+      Width = 953
       Height = 13
       Align = alTop
       Caption = #1051#1086#1075':'
@@ -153,7 +153,7 @@ object Form1: TForm1
     object Button1: TButton
       Left = 0
       Top = 274
-      Width = 804
+      Width = 953
       Height = 25
       Hint = 
         #1055#1088#1080' '#1085#1072#1078#1072#1090#1080#1080' '#1073#1091#1076#1077#1090' '#1074#1099#1087#1086#1083#1085#1077#1085#1086' '#1076#1077#1081#1089#1090#1074#1080#1077' '#1087#1086' '#1089#1087#1080#1089#1082#1091' '#1079#1072#1082#1072#1079#1086#1074' '#1089#1086#1075#1083#1072#1089#1085#1086' ' +
@@ -166,7 +166,7 @@ object Form1: TForm1
     object GridPanel1: TGridPanel
       Left = 0
       Top = 0
-      Width = 804
+      Width = 953
       Height = 274
       Align = alTop
       BevelOuter = bvNone
@@ -201,9 +201,9 @@ object Form1: TForm1
         end>
       TabOrder = 1
       object PageControl1: TPageControl
-        Left = 118
+        Left = 140
         Top = 0
-        Width = 686
+        Width = 813
         Height = 274
         Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1085#1077#1086#1073#1093#1086#1076#1080#1084#1086#1077' '#1076#1077#1081#1089#1090#1074#1080#1077
         ActivePage = TabSheet1
@@ -216,7 +216,7 @@ object Form1: TForm1
           object GridPanel2: TGridPanel
             Left = 0
             Top = 0
-            Width = 678
+            Width = 805
             Height = 246
             Align = alClient
             BevelOuter = bvNone
@@ -260,12 +260,12 @@ object Form1: TForm1
               end>
             TabOrder = 0
             DesignSize = (
-              678
+              805
               246)
             object ComboBox1: TComboBox
               Left = 0
               Top = 0
-              Width = 214
+              Width = 255
               Height = 22
               Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1082#1072#1082#1086#1081' '#1089#1082#1083#1072#1076' '#1085#1077#1086#1073#1093#1086#1076#1080#1084#1086' '#1080#1079#1084#1077#1085#1080#1090#1100
               Align = alTop
@@ -278,19 +278,18 @@ object Form1: TForm1
                 #1057#1082#1083#1072#1076' '#1074#1099#1076#1072#1095#1080)
             end
             object ComboBox2: TComboBox
-              Left = 429
+              Left = 510
               Top = 0
-              Width = 249
-              Height = 22
+              Width = 295
+              Height = 21
               Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1085#1072' '#1082#1072#1082#1086#1081' '#1089#1082#1083#1072#1076' '#1080#1079#1084#1077#1085#1103#1077#1084
               Align = alTop
-              Style = csOwnerDrawFixed
               TabOrder = 1
             end
             object Label3: TLabel
-              Left = 214
+              Left = 255
               Top = 0
-              Width = 215
+              Width = 255
               Height = 21
               Align = alTop
               Alignment = taCenter
@@ -304,15 +303,13 @@ object Form1: TForm1
               ExplicitWidth = 99
             end
             object CheckBox1: TCheckBox
-              Left = 278
+              Left = 339
               Top = 174
               Width = 87
               Height = 17
               Anchors = []
               Caption = #1057' '#1091#1089#1083#1091#1075#1072#1084#1080
               TabOrder = 2
-              ExplicitLeft = 63
-              ExplicitTop = 177
             end
           end
         end
@@ -322,7 +319,7 @@ object Form1: TForm1
           object GridPanel3: TGridPanel
             Left = 0
             Top = 0
-            Width = 678
+            Width = 805
             Height = 246
             Align = alClient
             BevelOuter = bvNone
@@ -378,7 +375,7 @@ object Form1: TForm1
             object Label4: TLabel
               Left = 0
               Top = 0
-              Width = 337
+              Width = 400
               Height = 21
               Align = alTop
               Caption = #1060#1080#1089#1082#1072#1083#1100#1085#1099#1081' '#1087#1088#1080#1079#1085#1072#1082' '#1091' '#1086#1087#1083#1072#1090' '#1082#1072#1088#1090#1086#1081':'
@@ -391,9 +388,9 @@ object Form1: TForm1
               ExplicitWidth = 294
             end
             object ComboBox4: TComboBox
-              Left = 337
+              Left = 400
               Top = 0
-              Width = 341
+              Width = 405
               Height = 22
               Hint = #1042#1099#1073#1077#1088#1080#1090#1077' - '#1092#1080#1089#1082#1072#1083#1100#1085#1072#1103' '#1086#1087#1083#1072#1090#1072' '#1080#1083#1080' '#1085#1077#1090
               Align = alTop
@@ -407,7 +404,7 @@ object Form1: TForm1
             object Label6: TLabel
               Left = 0
               Top = 69
-              Width = 337
+              Width = 400
               Height = 21
               Align = alTop
               Caption = #1060#1080#1089#1082#1072#1083#1100#1085#1099#1081' '#1087#1088#1080#1079#1085#1072#1082' '#1091' '#1086#1087#1083#1072#1090' '#1085#1072#1083#1080#1095#1082#1086#1081':'
@@ -420,9 +417,9 @@ object Form1: TForm1
               ExplicitWidth = 315
             end
             object ComboBox5: TComboBox
-              Left = 337
+              Left = 400
               Top = 69
-              Width = 341
+              Width = 405
               Height = 22
               Hint = #1042#1099#1073#1077#1088#1080#1090#1077' - '#1092#1080#1089#1082#1072#1083#1100#1085#1072#1103' '#1086#1087#1083#1072#1090#1072' '#1080#1083#1080' '#1085#1077#1090
               Align = alTop
@@ -436,7 +433,7 @@ object Form1: TForm1
             object Label7: TLabel
               Left = 0
               Top = 139
-              Width = 337
+              Width = 400
               Height = 21
               Align = alTop
               Caption = #1054#1087#1083#1072#1090#1072' '#1087#1088#1086#1074#1077#1076#1077#1085#1072' '#1095#1077#1088#1077#1079' POS-'#1090#1077#1088#1084#1080#1085#1072#1083
@@ -449,9 +446,9 @@ object Form1: TForm1
               ExplicitWidth = 310
             end
             object ComboBox6: TComboBox
-              Left = 337
+              Left = 400
               Top = 139
-              Width = 341
+              Width = 405
               Height = 22
               Hint = #1042#1099#1073#1077#1088#1080#1090#1077' - '#1090#1077#1088#1084#1080#1085#1072#1083#1100#1085#1072#1103' '#1086#1087#1083#1072#1090#1072' '#1080#1083#1080' '#1085#1077#1090
               Align = alTop
@@ -464,42 +461,164 @@ object Form1: TForm1
             end
           end
         end
+        object TabSheet6: TTabSheet
+          Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1082#1072#1089#1089#1091' '#1086#1087#1083#1072#1090#1099
+          ImageIndex = 5
+          object GridPanel7: TGridPanel
+            Left = 0
+            Top = 0
+            Width = 805
+            Height = 246
+            Align = alClient
+            BevelOuter = bvNone
+            ColumnCollection = <
+              item
+                Value = 49.944439420716130000
+              end
+              item
+                Value = 50.055560579283870000
+              end>
+            ControlCollection = <
+              item
+                Column = 1
+                Control = ComboBox10
+                Row = 0
+              end
+              item
+                Column = 0
+                Control = Label10
+                Row = 0
+              end>
+            RowCollection = <
+              item
+                Value = 48.870299647528010000
+              end
+              item
+                Value = 51.129700352471990000
+              end>
+            TabOrder = 0
+            object ComboBox10: TComboBox
+              Left = 402
+              Top = 0
+              Width = 403
+              Height = 21
+              Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1085#1072' '#1082#1072#1082#1086#1081' '#1089#1082#1083#1072#1076' '#1080#1079#1084#1077#1085#1103#1077#1084
+              Align = alTop
+              TabOrder = 0
+            end
+            object Label10: TLabel
+              Left = 0
+              Top = 0
+              Width = 402
+              Height = 21
+              Align = alTop
+              Alignment = taCenter
+              Caption = #1080#1079#1084#1077#1085#1080#1090#1100' '#1085#1072
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -17
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              ExplicitWidth = 99
+            end
+          end
+        end
         object TabSheet3: TTabSheet
           Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1089#1090#1072#1090#1091#1089
           ImageIndex = 2
-          object Label5: TLabel
+          object GridPanel8: TGridPanel
             Left = 0
             Top = 0
-            Width = 678
-            Height = 21
-            Align = alTop
-            Alignment = taCenter
-            Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1089#1090#1072#1090#1091#1089' '#1079#1072#1082#1072#1079#1086#1074' '#1085#1072':'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -17
-            Font.Name = 'Tahoma'
-            Font.Style = []
-            ParentFont = False
-            ExplicitWidth = 225
-          end
-          object ComboBox3: TComboBox
-            Left = 0
-            Top = 21
-            Width = 678
-            Height = 22
-            Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1082#1072#1082#1086#1081' '#1089#1090#1072#1090#1091#1089' '#1091#1089#1090#1072#1085#1086#1074#1080#1090#1100
-            Align = alTop
-            Style = csOwnerDrawFixed
+            Width = 805
+            Height = 246
+            Align = alClient
+            ColumnCollection = <
+              item
+                Value = 50.000000000000000000
+              end
+              item
+                Value = 50.000000000000000000
+              end>
+            ControlCollection = <
+              item
+                Column = 0
+                Control = Label11
+                Row = 0
+              end
+              item
+                Column = 1
+                Control = ComboBox3
+                Row = 0
+              end
+              item
+                Column = 0
+                ColumnSpan = 2
+                Control = CheckBox2
+                Row = 1
+              end>
+            RowCollection = <
+              item
+                Value = 50.000000000000000000
+              end
+              item
+                Value = 50.000000000000000000
+              end>
             TabOrder = 0
-            Items.Strings = (
-              #1053#1086#1074#1099#1081
-              #1053#1072' '#1093#1088#1072#1085#1077#1085#1080#1080
-              #1042' '#1080#1089#1087#1086#1083#1085#1077#1085#1080#1080
-              #1048#1089#1087#1086#1083#1085#1077#1085#1085#1099#1081'  '
-              #1042#1099#1076#1072#1085#1085#1099#1081
-              #1047#1072#1082#1088#1099#1090#1099#1081
-              #1054#1090#1084#1077#1085#1105#1085#1085#1099#1081)
+            ExplicitLeft = 2
+            ExplicitTop = -2
+            DesignSize = (
+              805
+              246)
+            object Label11: TLabel
+              Left = 1
+              Top = 1
+              Width = 401
+              Height = 21
+              Align = alTop
+              Alignment = taCenter
+              Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1089#1090#1072#1090#1091#1089' '#1079#1072#1082#1072#1079#1086#1074' '#1085#1072':'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -17
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              ExplicitWidth = 225
+            end
+            object ComboBox3: TComboBox
+              Left = 402
+              Top = 1
+              Width = 402
+              Height = 22
+              Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1082#1072#1082#1086#1081' '#1089#1090#1072#1090#1091#1089' '#1091#1089#1090#1072#1085#1086#1074#1080#1090#1100
+              Align = alTop
+              Style = csOwnerDrawFixed
+              TabOrder = 0
+              Items.Strings = (
+                #1053#1086#1074#1099#1081
+                #1053#1072' '#1093#1088#1072#1085#1077#1085#1080#1080
+                #1042' '#1080#1089#1087#1086#1083#1085#1077#1085#1080#1080
+                #1048#1089#1087#1086#1083#1085#1077#1085#1085#1099#1081'  '
+                #1042#1099#1076#1072#1085#1085#1099#1081
+                #1047#1072#1082#1088#1099#1090#1099#1081
+                #1054#1090#1084#1077#1085#1105#1085#1085#1099#1081)
+              ExplicitLeft = 530
+              ExplicitTop = 21
+              ExplicitWidth = 145
+              ExplicitHeight = 21
+            end
+            object CheckBox2: TCheckBox
+              Left = 354
+              Top = 175
+              Width = 97
+              Height = 17
+              Anchors = []
+              Caption = #1057' '#1091#1089#1083#1091#1075#1072#1084#1080
+              TabOrder = 1
+              ExplicitLeft = 320
+              ExplicitTop = 144
+            end
           end
         end
         object TabSheet5: TTabSheet
@@ -508,7 +627,7 @@ object Form1: TForm1
           object ComboBox7: TComboBox
             Left = 0
             Top = 0
-            Width = 678
+            Width = 805
             Height = 21
             Hint = #1042#1099#1073#1077#1088#1080#1090#1077' '#1082#1072#1082#1086#1081' '#1089#1090#1072#1090#1091#1089' '#1091#1089#1090#1072#1085#1086#1074#1080#1090#1100
             Align = alTop
@@ -517,7 +636,7 @@ object Form1: TForm1
           object Edit2: TEdit
             Left = 0
             Top = 21
-            Width = 678
+            Width = 805
             Height = 21
             Align = alTop
             PasswordChar = '*'
@@ -527,7 +646,7 @@ object Form1: TForm1
           object RadioGroup1: TRadioGroup
             Left = 0
             Top = 42
-            Width = 678
+            Width = 805
             Height = 46
             Align = alTop
             Caption = #1044#1077#1081#1089#1090#1074#1080#1077
@@ -545,7 +664,7 @@ object Form1: TForm1
           object Memo3: TMemo
             Left = 0
             Top = 0
-            Width = 678
+            Width = 805
             Height = 164
             Hint = #1042#1074#1077#1076#1080#1090#1077' SQL-'#1079#1072#1087#1088#1086#1089
             Align = alClient
@@ -554,7 +673,7 @@ object Form1: TForm1
           object GridPanel4: TGridPanel
             Left = 0
             Top = 205
-            Width = 678
+            Width = 805
             Height = 41
             Align = alBottom
             BevelOuter = bvNone
@@ -587,7 +706,7 @@ object Form1: TForm1
             object RadioButton1: TRadioButton
               Left = 0
               Top = 0
-              Width = 337
+              Width = 400
               Height = 41
               Align = alClient
               Caption = 
@@ -599,9 +718,9 @@ object Form1: TForm1
               WordWrap = True
             end
             object RadioButton2: TRadioButton
-              Left = 337
+              Left = 400
               Top = 0
-              Width = 341
+              Width = 405
               Height = 41
               Align = alClient
               Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100' '#1086#1076#1080#1085' '#1088#1072#1079
@@ -611,7 +730,7 @@ object Form1: TForm1
           object GridPanel5: TGridPanel
             Left = 0
             Top = 164
-            Width = 678
+            Width = 805
             Height = 41
             Align = alBottom
             BevelOuter = bvNone
@@ -641,7 +760,7 @@ object Form1: TForm1
             object RadioButton3: TRadioButton
               Left = 0
               Top = 0
-              Width = 336
+              Width = 398
               Height = 41
               Align = alClient
               Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100' '#1079#1072#1087#1088#1086#1089' '#1073#1077#1079' '#1088#1077#1079#1091#1083#1100#1090#1072#1090#1072' '
@@ -651,9 +770,9 @@ object Form1: TForm1
               WordWrap = True
             end
             object RadioButton4: TRadioButton
-              Left = 336
+              Left = 398
               Top = 0
-              Width = 342
+              Width = 407
               Height = 41
               Align = alClient
               Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100' '#1079#1072#1087#1088#1086#1089' '#1080' '#1087#1086#1083#1091#1095#1080#1090#1100' '#1088#1077#1079#1091#1083#1100#1090#1072#1090
@@ -665,7 +784,7 @@ object Form1: TForm1
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 118
+        Width = 140
         Height = 274
         Align = alClient
         Anchors = []
@@ -674,7 +793,7 @@ object Form1: TForm1
         object Label2: TLabel
           Left = 0
           Top = 0
-          Width = 118
+          Width = 140
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -685,12 +804,13 @@ object Form1: TForm1
           Font.Name = 'Tahoma'
           Font.Style = []
           ParentFont = False
+          ExplicitWidth = 118
         end
         object Memo1: TMemo
           Left = 0
           Top = 19
-          Width = 118
-          Height = 255
+          Width = 140
+          Height = 234
           Hint = #1057#1102#1076#1072' '#1074#1074#1086#1076#1080#1084' '#1087#1077#1088#1077#1095#1077#1085#1100' '#1079#1072#1082#1072#1079#1086#1074'. '#1054#1076#1085#1072' '#1089#1090#1088#1086#1082#1072' - '#1086#1076#1080#1085' '#1079#1072#1082#1072#1079'.'
           Align = alClient
           BevelInner = bvNone
@@ -698,12 +818,33 @@ object Form1: TForm1
           BorderStyle = bsNone
           TabOrder = 0
         end
+        object ComboBox8: TComboBox
+          Left = 0
+          Top = 253
+          Width = 140
+          Height = 21
+          Align = alBottom
+          Style = csDropDownList
+          ItemIndex = 0
+          TabOrder = 1
+          Text = '2021'
+          Items.Strings = (
+            '2021'
+            '2020'
+            '2019'
+            '2018'
+            '2017'
+            '2016'
+            '2015'
+            '2014'
+            '2013')
+        end
       end
     end
     object Memo2: TMemo
       Left = 0
       Top = 312
-      Width = 804
+      Width = 953
       Height = 175
       Hint = #1057#1102#1076#1072' '#1073#1091#1076#1077#1090' '#1074#1099#1074#1086#1076#1080#1090#1100#1089#1103' '#1088#1077#1079#1091#1083#1100#1090#1072#1090' '#1074#1099#1087#1086#1083#1085#1077#1085#1085#1099#1093' '#1076#1077#1081#1089#1090#1074#1080#1081
       Align = alClient

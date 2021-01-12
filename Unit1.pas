@@ -13,7 +13,7 @@ uses
 
 type
 
-  TSclad = record
+  TIds = record
     ID: Integer;
     Name: String;
   end;
@@ -33,8 +33,6 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    Label5: TLabel;
-    ComboBox3: TComboBox;
     GridPanel3: TGridPanel;
     Label4: TLabel;
     ComboBox4: TComboBox;
@@ -63,6 +61,15 @@ type
     Edit2: TEdit;
     RadioGroup1: TRadioGroup;
     CheckBox1: TCheckBox;
+    ComboBox8: TComboBox;
+    TabSheet6: TTabSheet;
+    GridPanel7: TGridPanel;
+    ComboBox10: TComboBox;
+    Label10: TLabel;
+    GridPanel8: TGridPanel;
+    Label11: TLabel;
+    ComboBox3: TComboBox;
+    CheckBox2: TCheckBox;
     procedure FormShow(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -81,7 +88,8 @@ var
   Query, Query2: TFDQuery;
   DataSource: TDataSource;
   FDB: String;
-  Sclads: array of TSclad;
+  Sclads: array of TIds;
+  Kasses: array of TIds;
 
 implementation
 
@@ -98,7 +106,7 @@ doc_id := '';
 dor_id := '';
 
   Try
-    Query.Open('select * from docs where cast(doc_date as date)>='+#39+'01.01.'+IntToStr(YearOF(now))+#39+' and doc_num = '+#39+DocNum+#39+' order by doc_date desc');
+    Query.Open('select * from docs where cast(doc_date as date)>='+#39+'01.01.'+Form1.ComboBox8.Text+#39+' and cast(doc_date as date)<='+#39+'31.12.'+Form1.ComboBox8.Text+#39+' and doc_num = '+#39+DocNum+#39+' order by doc_date desc');
   Except
   on E:Exception do
     begin
@@ -165,7 +173,7 @@ begin
   Result := '';
 
   Try
-  Query.Open('select * from docs where cast(doc_date as date)>='+#39+'01.01.'+IntToStr(YearOF(now))+#39+' and doc_num = '+#39+DocNum+#39+' order by doc_date desc' );
+  Query.Open('select * from docs where cast(doc_date as date)>='+#39+'01.01.'+Form1.ComboBox8.Text+#39+' and cast(doc_date as date)<='+#39+'31.12.'+Form1.ComboBox8.Text+#39+' and doc_num = '+#39+DocNum+#39+' order by doc_date desc' );
   Except
   on E:Exception do
     begin
@@ -255,6 +263,78 @@ begin
 
 end;
 
+Function ChangeKassaPay(DocNum: String; KassaID: String): String;
+  Var
+  I: Integer;
+begin
+  Result := '';
+
+  Try
+  Query.Open('select * from docs where cast(doc_date as date)>='+#39+'01.01.'+Form1.ComboBox8.Text+#39+' and cast(doc_date as date)<='+#39+'31.12.'+Form1.ComboBox8.Text+#39+' and doc_num = '+#39+DocNum+#39+' order by doc_date desc' );
+  Except
+  on E:Exception do
+    begin
+    Result := 'Заказ '+DocNum+': произошла ошибка при первом запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+    exit;
+    end;
+  End;
+
+  if Query.RecordCount<1 then
+  begin
+    Result := 'Заказ '+DocNum+': не удалось найти заказ за этот год!';
+    exit;
+  end;
+
+  Try
+  Query.Open('select * from docs_order where doc_id = '+Query.FieldByName('doc_id').AsString);
+  Except
+  on E:Exception do
+    begin
+    Result := 'Заказ '+DocNum+': произошла ошибка при первом запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+    exit;
+    end;
+  End;
+
+  if Query.RecordCount<1 then
+  begin
+    Result := 'Заказ '+DocNum+': не удалось найти заказ за этот год!';
+    exit;
+  end;
+
+  Try
+  Query.Open('select * from doc_order_pays where doc_order_id='+Query.FieldByName('id').AsString);
+  Except
+  on E:Exception do
+    begin
+    Result := 'Заказ '+DocNum+': произошла ошибка при втором запросе к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!';
+    exit;
+    end;
+  End;
+
+  if Query.RecordCount<1 then
+  begin
+    Result := 'Заказ '+DocNum+': не удалось найти оплаты!';
+    exit;
+  end;
+
+    Try
+      for I := 0 to Query.RecordCount-1 do
+      begin
+        if Query.FieldByName('DOC_CARD_ID').AsString<>'' then
+            Query2.ExecSQL('Update docs_card set kassa_id='+KassaID+' where doc_id='+Query.FieldByName('DOC_CARD_ID').AsString);
+        if Query.FieldByName('DOC_KASSA_ID').AsString<>'' then
+            Query2.ExecSQL('Update docs_kassa set kassa_id='+KassaID+' where doc_id='+Query.FieldByName('DOC_KASSA_ID').AsString);
+        Query.Next;
+      end;
+    Except
+      Result := 'Заказ '+DocNum+': не удалось изменить кассу оплат!';
+      exit;
+    End;
+
+  Result := 'Заказ '+DocNum+': обработан!';
+
+end;
+
 Function ExecSQL(Str: String; Form2Show: Boolean = false): String;
 Begin
   Try
@@ -308,117 +388,129 @@ Begin
   End;
 End;
 
-Function GetScladIDByName(Str: String): Integer;
+Function GetIDByName(IDS: array of TIds; Str: String): Integer;
   Var
   I: Integer;
 begin
   Result := -1;
-  for I := Low(Sclads) to High(Sclads) do
-    if AnsiUpperCase(Str)=AnsiUpperCase(Sclads[I].Name) then
-  Result := Sclads[I].ID;
+  for I := Low(IDS) to High(IDS) do
+    if AnsiUpperCase(Str)=AnsiUpperCase(IDS[I].Name) then
+  Result := IDS[I].ID;
 end;
 
-Function GetScladNameByID(Str: Integer): String;
+Function GetNameByID(IDS: array of TIds; Str: Integer): String;
   Var
   I: Integer;
 begin
   Result := '';
-  for I := Low(Sclads) to High(Sclads) do
-    if Str=Sclads[I].ID then
-  Result := Sclads[I].Name;
+  for I := Low(IDS) to High(IDS) do
+    if Str=IDS[I].ID then
+  Result := IDS[I].Name;
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
   Var
   I: Integer;
 begin
-  case PageControl1.ActivePageIndex of
-    0:
-      begin
-        case ComboBox1.ItemIndex of
-          0:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'CURRENT_SCLAD_ID',IntToStr(GetScladIdByName(ComboBox2.Text)), Form1.CheckBox1.Checked));
-            end;
-          1:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'SCLAD_KREDIT_ID',IntToStr(GetScladIdByName(ComboBox2.Text))));
-            end;
-          2:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'SCLAD_TO',IntToStr(GetScladIdByName(ComboBox2.Text))));
-            end;
+  Button1.Caption := 'Выполняем...';
+  Button1.Enabled := false;
+  try
+    case PageControl1.ActivePageIndex of
+      0:
+        begin
+          case ComboBox1.ItemIndex of
+            0:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'CURRENT_SCLAD_ID',IntToStr(GetIdByName(Sclads, ComboBox2.Text)), Form1.CheckBox1.Checked));
+              end;
+            1:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'SCLAD_KREDIT_ID',IntToStr(GetIdByName(Sclads, ComboBox2.Text))));
+              end;
+            2:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'SCLAD_TO',IntToStr(GetIdByName(Sclads, ComboBox2.Text))));
+              end;
+          end;
         end;
-      end;
-    1:
-      begin
-        for I := 0 to Memo1.Lines.Count-1 do
-        Memo2.Lines.Add(ChangeFiscPay(Memo1.Lines.Strings[I],ComboBox4.ItemIndex, ComboBox5.ItemIndex, ComboBox6.ItemIndex));
-      end;
-    2:
-      begin
-        case ComboBox3.ItemIndex of
-          0:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','1'));
-            end;
-          1:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','2'));
-            end;
-          2:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','3'));
-            end;
-          3:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','4'));
-            end;
-          4:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','5'));
-            end;
-          5:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','6'));
-            end;
-          6:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','7'));
-            end;
+      1:
+        begin
+          for I := 0 to Memo1.Lines.Count-1 do
+          Memo2.Lines.Add(ChangeFiscPay(Memo1.Lines.Strings[I],ComboBox4.ItemIndex, ComboBox5.ItemIndex, ComboBox6.ItemIndex));
         end;
-      end;
-    3:
-      begin
-        case RadioGroup1.ItemIndex of
-          0: Memo2.Lines.Add(GetPassword);
-          1: Memo2.Lines.Add(SetPassword);
+      2:
+        begin
+          for I := 0 to Memo1.Lines.Count-1 do
+          Memo2.Lines.Add(ChangeKassaPay(Memo1.Lines.Strings[I],IntToStr(GetIdByName(Kasses, ComboBox10.Text))));
         end;
-      end;
-    4:
-      begin
-        case RadioButton1.Checked of
-          True:
-            begin
-              for I := 0 to Memo1.Lines.Count-1 do
-              Memo2.Lines.Add(ExecSQL(StringReplace(Memo3.Text, ':var', Memo1.Lines.Strings[I],[rfReplaceAll, rfIgnoreCase]), RadioButton3.Checked));
-            end;
-          False:
-            begin
-              Memo2.Lines.Add(ExecSQL(Memo3.Text, RadioButton3.Checked));
-            end;
+      3:
+        begin
+          case ComboBox3.ItemIndex of
+            0:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','1', CheckBox2.Checked));
+              end;
+            1:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','2', CheckBox2.Checked));
+              end;
+            2:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','3', CheckBox2.Checked));
+              end;
+            3:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','4', CheckBox2.Checked));
+              end;
+            4:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','5', CheckBox2.Checked));
+              end;
+            5:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','6', CheckBox2.Checked));
+              end;
+            6:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ChangeFieldOrder(Memo1.Lines.Strings[I],'STATUS_ID','7', CheckBox2.Checked));
+              end;
+          end;
         end;
-      end;
+      4:
+        begin
+          case RadioGroup1.ItemIndex of
+            0: Memo2.Lines.Add(GetPassword);
+            1: Memo2.Lines.Add(SetPassword);
+          end;
+        end;
+      5:
+        begin
+          case RadioButton1.Checked of
+            True:
+              begin
+                for I := 0 to Memo1.Lines.Count-1 do
+                Memo2.Lines.Add(ExecSQL(StringReplace(Memo3.Text, ':var', Memo1.Lines.Strings[I],[rfReplaceAll, rfIgnoreCase]), RadioButton3.Checked));
+              end;
+            False:
+              begin
+                Memo2.Lines.Add(ExecSQL(Memo3.Text, RadioButton3.Checked));
+              end;
+          end;
+        end;
+    end;
+  finally
+    Button1.Caption := 'Выполнить';
+    Button1.Enabled := true;
   end;
 end;
 
@@ -480,32 +572,32 @@ begin
     Application.Terminate;
   end;
 
-    Try
-      Connection := TFDConnection.Create(nil);
-      Connection.DriverName := 'FB';
-      with Connection.Params as TFDPhysFBConnectionDefParams do
-        begin
-          Server := '127.0.0.1';
-          Database := fdb;
-          UserName := 'sysdba';
-          Password := 'masterkey';
-          IBAdvanced := 'config=WireCompression=false';
-        end;
-      Connection.Connected := True;
-    Except
-    on E:Exception do
+  Try
+    Connection := TFDConnection.Create(nil);
+    Connection.DriverName := 'FB';
+    with Connection.Params as TFDPhysFBConnectionDefParams do
       begin
-        ShowMessage('Произошла ошибка при подключении к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!');
-        Application.Terminate;
+        Server := '127.0.0.1';
+        Database := fdb;
+        UserName := 'sysdba';
+        Password := 'masterkey';
+        IBAdvanced := 'config=WireCompression=false';
       end;
-    End;
+    Connection.Connected := True;
+  Except
+  on E:Exception do
+    begin
+      ShowMessage('Произошла ошибка при подключении к БД.'+#13#10+E.ClassName+' '+E.Message+#13#10+'Обратитесь к тех. поддержке!');
+      Application.Terminate;
+    end;
+  End;
 
-    Query := TFDQuery.Create(nil);
-    Query.Connection := Connection;
-    Query2 := TFDQuery.Create(nil);
-    Query2.Connection := Connection;
+  Query := TFDQuery.Create(nil);
+  Query.Connection := Connection;
+  Query2 := TFDQuery.Create(nil);
+  Query2.Connection := Connection;
 
-    DataSource := TDataSource.Create(nil);
+  DataSource := TDataSource.Create(nil);
 
   try
     Query.Open('select * from sclads');
@@ -528,9 +620,36 @@ begin
         Sclads[I].Name := Query.FieldByName('NAME').AsString;
         Query.Next;
       end;
-  Combobox2.Items.Clear;
-  for I := Low(Sclads) to High(Sclads) do
-    Combobox2.Items.Add(Sclads[I].Name);
+    Combobox2.Items.Clear;
+    for I := Low(Sclads) to High(Sclads) do
+      Combobox2.Items.Add(Sclads[I].Name);
+  end;
+
+  try
+    Query.Open('select * from kasses');
+    Query.FetchAll;
+  except
+    ShowMessage('Не удалось загрузить названия касс!');
+    Application.Terminate;
+  end;
+
+  if Query.RecordCount<=0 then
+  begin
+    ShowMessage('Не удалось загрузить названия касс!');
+    Application.Terminate;
+  end else
+  begin
+    SetLength(Kasses,Query.RecordCount);
+    for I := 0 to Query.RecordCount-1 do
+      begin
+        Kasses[I].ID := Query.FieldByName('ID').AsInteger;
+        Kasses[I].Name := Query.FieldByName('NAME').AsString;
+        Query.Next;
+      end;
+    Combobox10.Items.Clear;
+    for I := Low(Kasses) to High(Kasses) do
+      Combobox10.Items.Add(Kasses[I].Name);
+  end;
 
   try
     Query.Open('select * from users order by description');
@@ -555,6 +674,8 @@ begin
     end;
   end;
 
+
+
   ComboBox1.ItemIndex:=0;
   ComboBox2.ItemIndex:=0;
   ComboBox3.ItemIndex:=0;
@@ -562,7 +683,7 @@ begin
   ComboBox5.ItemIndex:=0;
   ComboBox6.ItemIndex:=0;
   ComboBox7.ItemIndex:=0;
-end;
+  ComboBox10.ItemIndex:=0;
 
 
 end;
